@@ -102,3 +102,67 @@ public int calculateNeighbors(int size) {
      return result;
    }
 ```
+<br>
+<b>NOTE:</b> If you enter "test" as a commandline argument, you will get a prompt reading<br>
+"You are in easter egg mode!". This will calculate neighbors using the horizontal wrap feature.
+
+```bash
+./app test
+You are in easter egg mode!
+Enter row and column amount to make a grid
+row:
+```
+
+New function in question:
+
+```java
+/**
+    * Same as above function but with wrapping feature this time done 
+    * exhuastively for easier readability
+    * @param size number of cells in neighborhood  
+    * @return number of neighbors or -1 in case of failure
+    */
+   public int calculateNeighborsWrap(int size) {
+      // Sources count so we default to how many there are
+      int result = this.sources.size();
+
+      // Fail if size is massive or negative otherwise a positive count should
+      // always be returned
+      if(size > Integer.MAX_VALUE || size < 0) {
+         return -1;
+      }
+
+      int gridWidth = this.cells[0].length; 
+    
+      // TODO: optimize this loop
+      for(SimpleEntry<Integer, Integer> source : this.sources) {
+         int sourceRow = source.getKey();
+         int sourceColumn = source.getValue();
+
+         for(int i = 0; i < this.cells.length; i++) { 
+            for(int j = 0; j < gridWidth; j++) {     
+               // Track current cell traversal for once we hit the horizontal 
+               // boundaries
+               int rowDistance = Math.abs(sourceRow - i);
+               
+               // Compare direct and wrapped distance using the smaller of the
+               // 2 for horizontal traversal
+               int directColDistance = Math.abs(sourceColumn - j);
+               int wrappedColDistance = gridWidth - directColDistance;
+               int shortestColDistance = Math.min(directColDistance, 
+                  wrappedColDistance);
+
+               // Add check to work for traversal in cases of wrapping
+               if(rowDistance + shortestColDistance <= size) {
+                  if (this.cells[i][j] == VACANCY.get()) {
+                     this.cells[i][j] = NEIGHBOR.get();
+                     result++;
+                  }
+               }
+            }
+         }
+      }
+
+      return result;
+   }
+```
