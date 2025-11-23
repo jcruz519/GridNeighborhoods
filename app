@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp bin App
+java -cp bin App "$@"

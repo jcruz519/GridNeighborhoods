@@ -131,4 +131,26 @@ public class GridTest {
       assertEquals(-1, grid.calculateNeighbors(Integer.MAX_VALUE + 1), 
          "Calculate neighbors should return -1 on input above int max" );
    }
+
+   public void 
+      testCalculateNeighborsWrap_shouldReturnAccurateNonZeroPositiveResult
+      (int rows, int columns, int[] x, int[] y, int size, int expected) {
+      Grid grid = new Grid(rows, columns);
+         
+      for(int i = 0; i < x.length; i++) {
+         grid.addSource(x[i], y[i]);
+      }
+
+      assertEquals(expected, grid.calculateNeighborsWrap(size), "Calculate " + 
+         "neighbors wrap test");
+   }
+
+   public void testCalculateNeighborsWrapFailure_shouldReturnNegativeOne() {
+      Grid grid = new Grid(5, 5);
+
+      assertEquals(-1, grid.calculateNeighbors(-1), "Calculate neighbors " + 
+         "wrap should return -1 on input under 0" );
+      assertEquals(-1, grid.calculateNeighborsWrap(Integer.MAX_VALUE + 1), 
+         "Calculate neighbors wrap should return -1 on input above int max" );
+   }
 }

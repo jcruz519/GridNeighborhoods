@@ -37,7 +37,7 @@ $(APP_SCRIPT):
 	@echo "Creating app runner script $(APP_SCRIPT)..."
 	@rm -f $(APP_SCRIPT) # Added safeguard to remove old file
 	@echo '#!/bin/bash' > $(APP_SCRIPT)
-	@echo '$(JAVA) -cp $(BIN_DIR) App' >> $(APP_SCRIPT)
+	@echo '$(JAVA) -cp $(BIN_DIR) App "$$@"' >> $(APP_SCRIPT)
 	@chmod +x $(APP_SCRIPT)
 	@echo "Created executable: $(APP_SCRIPT)"
 

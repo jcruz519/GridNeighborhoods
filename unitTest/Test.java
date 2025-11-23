@@ -24,7 +24,23 @@ public class Test {
       gridTest.
          testCalculateNeighbors_shouldReturnAccurateNonZeroPositiveResult
          (5, 5, empty, empty, 100, 0);
+      gridTest.
+         testCalculateNeighbors_shouldReturnAccurateNonZeroPositiveResult
+         (3, 3, x1, y1, 1, 3);
       gridTest.testCalculateNeighborsFailure_shouldReturnNegativeOne();
+      gridTest.
+         testCalculateNeighborsWrap_shouldReturnAccurateNonZeroPositiveResult
+         (5, 5, x1, y1, 1, 5);
+      gridTest.
+         testCalculateNeighborsWrap_shouldReturnAccurateNonZeroPositiveResult
+         (9, 5, x2, y2, 2, 19);
+      gridTest.
+         testCalculateNeighborsWrap_shouldReturnAccurateNonZeroPositiveResult
+         (5, 5, empty, empty, 100, 0);
+      gridTest.
+         testCalculateNeighborsWrap_shouldReturnAccurateNonZeroPositiveResult
+         (3, 3, x1, y1, 1, 4);
+      gridTest.testCalculateNeighborsWrapFailure_shouldReturnNegativeOne();
 
       System.out.println("--- Testing Complete ---");
    }

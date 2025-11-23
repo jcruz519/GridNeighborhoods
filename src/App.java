@@ -23,6 +23,16 @@ public class App
             scanner.close();
          }));
 
+	      // Check whather to run test function with wrapping feature
+	      boolean isTest = false;
+
+	      if(args.length > 0) {
+            if(args[0].equals("test")) {
+               isTest = true;
+	            System.out.println("You are in easter egg mode!");
+	         }
+	      }
+
          // Main loop allowing user to create a grid, add sources, calculate
          // neighbors, and handling any wrong input
          while(true) {
@@ -56,14 +66,17 @@ public class App
                      System.out.println("Out of bounds or source already " +
                      "exists!");
                   }
-               
                break;
 
                // Calculate neighbors: GOAL FOR THIS ASSIGNMENT
                case "c":
                   System.out.print("Enter size: ");
                   int size = validNumericInput(scanner, 0);
-                  int result = grid.calculateNeighbors(size);
+                  
+                  // Calculate result based on whether wrap feature is being 
+                  // used
+                  int result = isTest ? grid.calculateNeighborsWrap(size) :
+	               grid.calculateNeighbors(size);
                
                   if(result == -1) {
                      System.out.println("Invalid size detected! Should be " + 
